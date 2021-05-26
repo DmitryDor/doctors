@@ -1,12 +1,14 @@
 import {TableCell, TableContainer, TableRow} from "@material-ui/core";
 import Table from "@material-ui/core/Table";
 import {TableHeader} from "./TableHeader";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {DoctorType, setDoctorsTC} from "../../store/doctorsReducer";
+import {AppRootStateType, store} from "../../store/store";
 
 
 
-
-const rowInformation = [
+/*const rowInformation = [
     {
         id: 1,
         firstName: "Леонид",
@@ -39,9 +41,16 @@ const rowInformation = [
         birthDate: "1864-06-14",
         phone: "+15559665599"
     }
-]
+]*/
 
 export const TableContent = () => {
+
+    const dispatch = useDispatch()
+    const rowInformation = useSelector<AppRootStateType, Array<DoctorType>>(state => state.doctors)
+
+    useEffect(() => {
+        dispatch(setDoctorsTC())
+    }, [])
 
     const [orderDirection, setOrderDirection] = useState('asc')
     const [valueToOrderBy, setValueToOrderBy] = useState('fio')
@@ -105,7 +114,7 @@ export const TableContent = () => {
                                         {el.id}
                                     </TableCell>
                                     <TableCell>
-                                        {el.firstName}
+                                        {el.fio}
                                     </TableCell>
                                     <TableCell>
                                         {el.birthDate}
