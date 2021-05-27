@@ -5,43 +5,8 @@ import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {DoctorType, setDoctorsTC} from "../../store/doctorsReducer";
 import {AppRootStateType, store} from "../../store/store";
+import {NavLink} from "react-router-dom";
 
-
-
-/*const rowInformation = [
-    {
-        id: 1,
-        firstName: "Леонид",
-        lastName: "Старокадомский",
-        middleName: "Михайлович",
-        birthDate: "1875-03-27",
-        phone: "+79975669545"
-    },
-    {
-        id: 2,
-        firstName: "Владимир",
-        lastName: "Демихов",
-        middleName: "Петрович",
-        birthDate: "1916-06-18",
-        phone: "+74951263366"
-    },
-    {
-        id: 3,
-        firstName: "Виктор",
-        lastName: "Калнберз",
-        middleName: "Константинович",
-        birthDate: "1928-06-02",
-        phone: "+37156698963"
-    },
-    {
-        id: 4,
-        firstName: "Алоис",
-        lastName: "Альцгеймер",
-        middleName: "Эдуардович",
-        birthDate: "1864-06-14",
-        phone: "+15559665599"
-    }
-]*/
 
 export const TableContent = () => {
 
@@ -58,7 +23,7 @@ export const TableContent = () => {
     const [roesPerPage, setRoesPerPage] = useState(1)
 
     function descendingComparator(a: any, b: any, orderBy: any) {
-        debugger
+
         if (b[orderBy] < a[orderBy]) {
             return -1
         }
@@ -69,14 +34,13 @@ export const TableContent = () => {
     }
 
     function getComparator(order: any, orderBy: any) {
-        debugger
+
         return order === 'desc'
             ? (a: any, b: any) => descendingComparator(a, b, orderBy)
             : (a: any, b: any) => -descendingComparator(a, b, orderBy)
     }
 
     const sortedRowInformation = (rowArray: any, comparator: any) => {
-        debugger
         //@ts-ignore
         const stabilizedRowArray = rowArray.map((el, index) => [el, index])
         stabilizedRowArray.sort((a: any, b: any) => {
@@ -114,7 +78,7 @@ export const TableContent = () => {
                                         {el.id}
                                     </TableCell>
                                     <TableCell>
-                                        {el.fio}
+                                        <NavLink to={'/Worklog'} >{el.fio}</NavLink>
                                     </TableCell>
                                     <TableCell>
                                         {el.birthDate}
